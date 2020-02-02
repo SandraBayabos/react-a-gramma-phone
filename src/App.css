@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,10 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.landing-page {
+  height: 100%;
+  width: 100%;
+  padding-top: 10vh;
 }
