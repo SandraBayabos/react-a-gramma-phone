@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import LoadingIndicator from "./components/LoadingIndicator";
+import { Container, Row, Col } from "reactstrap";
 import "./App.css";
 
 function App() {
@@ -31,33 +32,26 @@ function App() {
   }, []);
 
   return (
-    <div
-      className="App"
-      style={{ height: "100vh", width: "100vw", padding: "0", margin: "0" }}
-    >
+    <Container fluid={true} className="App">
       <Navbar />
 
       {/* USING REACT ROUTER TO LINK TO SPECIFIC PAGES */}
-      <div className="container">
-        <Link to="/">Home</Link>
-        <Link to="/users/1">My Profile</Link>
 
-        {isLoading ? (
-          <LoadingIndicator />
-        ) : (
-          <Route
-            exact
-            path="/"
-            component={props => {
-              return <HomePage users={users} />;
-            }}
-          />
-        )}
-        <Route path="/users/:id">
-          <UserProfilePage users={users} />
-        </Route>
-      </div>
-    </div>
+      {isLoading ? (
+        <LoadingIndicator />
+      ) : (
+        <Route
+          exact
+          path="/"
+          component={props => {
+            return <HomePage users={users} />;
+          }}
+        />
+      )}
+      <Route path="/users/:id">
+        <UserProfilePage users={users} />
+      </Route>
+    </Container>
   );
 }
 

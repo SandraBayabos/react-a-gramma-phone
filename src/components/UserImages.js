@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Image from "react-graceful-image";
+import { Container, Row, Col } from "reactstrap";
 
 const UserImages = ({ userId }) => {
   const [images, setImages] = useState([]);
@@ -17,15 +19,19 @@ const UserImages = ({ userId }) => {
   }, []);
 
   return (
-    <div>
+    <>
       {images.map((image, index) => {
         return (
-          <div className="user-images" key={index} id={index}>
-            <img src={image} alt="user-images" className="" />
-          </div>
+          <Image
+            src={image}
+            alt="user-images"
+            className=""
+            key={index}
+            id={index}
+          />
         );
       })}
-    </div>
+    </>
   );
 };
 

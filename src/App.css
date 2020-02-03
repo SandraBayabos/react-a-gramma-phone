@@ -1,25 +1,18 @@
+body {
+  background: #2b4141;
+}
+
+.App {
+  background: #2b4141;
+}
+
 .container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  border: 1px solid #b6d6cc;
 }
 
-.landing-page {
-  height: 100%;
-  width: 100%;
-  padding-top: 10vh;
-}
-
-.user-display {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid black;
-  box-sizing: border-box;
-  padding: 5vw;
+.user-container {
+  border: 1px solid white;
+  margin: 10%;
 }
 
 .user-display img {
@@ -28,6 +21,19 @@
   border-radius: 100%;
 }
 
-#loader {
-  align-self: center;
+.user-images {
+  column-count: 1;
+  column-gap: 0.5em;
+}
+
+.user-images img {
+  width: calc(100% / 3);
+  border-radius: 0;
+  display: inline-block;
+  margin: 0 0.2em 0.5em;
+  box-sizing: border-box;
+}
+
+.profile-image {
+  border-radius: 50%;
 }
