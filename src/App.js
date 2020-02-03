@@ -1,11 +1,35 @@
-import React from "react";
-import { Router, Link, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Router, Link, Route, useParams } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import UserProfilePage from "./pages/UserProfilePage";
+import LoadingIndicator from "./components/LoadingIndicator";
 import "./App.css";
 
 function App() {
+  const [users, setUsers] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  // AXIOS CALL TO GET ALL USERS
+
+  useEffect(() => {
+    // performing a GET request
+    axios
+      .get("https://insta.nextacademy.com/api/v1/users")
+      .then(result => {
+        console.log(result.data);
+        setIsLoading(false);
+        const usersCopy = [...result.data];
+        setUsers(usersCopy);
+      })
+      .catch(error => {
+        // If unsuccessful, we notify users what went wrong
+        console.log("ERROR: ", error);
+      });
+  }, []);
+
   return (
     <div
       className="App"
@@ -14,12 +38,24 @@ function App() {
       <Navbar />
 
       {/* USING REACT ROUTER TO LINK TO SPECIFIC PAGES */}
-      <div>
+      <div className="container">
         <Link to="/">Home</Link>
         <Link to="/users/1">My Profile</Link>
 
-        <Route exact path="/" component={HomePage} />
-        <Route path="/users/:id" component={UserProfilePage} />
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : (
+          <Route
+            exact
+            path="/"
+            component={props => {
+              return <HomePage users={users} />;
+            }}
+          />
+        )}
+        <Route path="/users/:id">
+          <UserProfilePage users={users} />
+        </Route>
       </div>
     </div>
   );
