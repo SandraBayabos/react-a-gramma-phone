@@ -10,7 +10,7 @@ const HomePage = ({ users, images }) => {
         {users.map((user, index) => {
           const userId = user.id;
           return (
-            <div className="user-display" key={index} id={user.id}>
+            <div className="user-display" key={index} id={index}>
               <h2>{user.username}</h2>
               <div className="profile-image">
                 <img src={user.profileImage} alt="profile-image" />
