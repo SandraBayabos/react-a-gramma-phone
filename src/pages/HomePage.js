@@ -9,7 +9,6 @@ const HomePage = ({ users, images }) => {
       <div className="users-display">
         {users.map((user, index) => {
           const userId = user.id;
-          console.log(userId);
           return (
             <div className="user-display" key={index} id={user.id}>
               <h2>{user.username}</h2>
