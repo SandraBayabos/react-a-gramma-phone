@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AuthModal from "./AuthModal";
 import {
   Collapse,
   Navbar,
@@ -27,11 +28,13 @@ const NavBar = () => {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
           <NavItem>
-            <NavLink href="/components/">Components</NavLink>
+            <NavLink tag={Link} to="/">
+              Home
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="https://github.com/reactstrap/reactstrap">
-              GitHub
+            <NavLink tag={Link} to="/users/1">
+              My Profile
             </NavLink>
           </NavItem>
           <UncontrolledDropdown nav inNavbar>
@@ -46,7 +49,8 @@ const NavBar = () => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
-        <NavbarText>Simple Text</NavbarText>
+
+        <AuthModal />
       </Collapse>
     </Navbar>
   );

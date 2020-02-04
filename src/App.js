@@ -35,8 +35,6 @@ function App() {
     <Container fluid={true} className="App">
       <Navbar />
 
-      {/* USING REACT ROUTER TO LINK TO SPECIFIC PAGES */}
-
       {isLoading ? (
         <LoadingIndicator />
       ) : (

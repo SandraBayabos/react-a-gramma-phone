@@ -1,5 +1,6 @@
 import React from "react";
 import UserImages from "../components/UserImages";
+import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import CommentBox from "../components/CommentBox";
 import Image from "react-graceful-image";
@@ -19,7 +20,9 @@ const HomePage = ({ users, images }) => {
               key={index}
               id={index}
             >
-              <h2 className="align-center">{user.username}</h2>
+              <Link to="users/{userId}" className="align-center">
+                <h2>{user.username}</h2>
+              </Link>
               <Image
                 className="profile-image"
                 src={user.profileImage}
