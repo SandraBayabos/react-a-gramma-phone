@@ -13,6 +13,12 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  // const [logIn, setLoggedIn] = useState(false);
+
+  // const userIsLoggedIn = () => {
+
+  // }
+
   // AXIOS CALL TO GET ALL USERS
 
   useEffect(() => {

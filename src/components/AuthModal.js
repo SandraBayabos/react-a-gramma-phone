@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import LogInForm from "./LogInForm";
+import SignUpForm from "./SignUpForm";
 import {
   NavLink,
   Button,
@@ -10,30 +12,53 @@ import {
 
 const AuthModal = () => {
   const [modal, setModal] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
 
   const toggle = () => setModal(!modal);
+
+  const toggleLogInAndSignUp = () => {
+    if (showLogin) {
+      setShowLogin(true);
+    } else {
+      setShowLogin(false);
+    }
+  };
 
   return (
     <>
       <NavLink>
         <NavLink color="primary" onClick={toggle}>
-          Close
+          Log In
         </NavLink>
         <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+          <ModalHeader toggle={toggle}>
+            {showLogin ? "Log In" : "Sign Up"}
+          </ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            {showLogin ? (
+              <LogInForm
+                showLogin={showLogin}
+                toggleLogInAndSignUp={toggleLogInAndSignUp}
+                toggle={toggle}
+              />
+            ) : (
+              <SignUpForm
+                showLogin={showLogin}
+                toggleLogInAndSignUp={toggleLogInAndSignUp}
+                toggle={toggle}
+              />
+            )}
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={toggle}>
-              Sign Up
-            </Button>{" "}
+            {showLogin ? "Don't have an account?" : "Already have an account?"}
+            <Button
+              color="primary"
+              onClick={
+                showLogin ? () => setShowLogin(false) : () => setShowLogin(true)
+              }
+            >
+              {showLogin ? "Sign Up" : "Log In"}
+            </Button>
             <Button color="secondary" onClick={toggle}>
               Cancel
             </Button>

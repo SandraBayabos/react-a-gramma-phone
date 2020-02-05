@@ -20,7 +20,7 @@ const HomePage = ({ users, images }) => {
               key={index}
               id={index}
             >
-              <Link to="users/{userId}" className="align-center">
+              <Link to={`users/${userId}`} className="align-center">
                 <h2>{user.username}</h2>
               </Link>
               <Image
