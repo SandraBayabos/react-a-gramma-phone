@@ -5,7 +5,9 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import LoadingIndicator from "./components/LoadingIndicator";
+import MyProfilePage from "./components/MyProfilePage";
 import { Container, Row, Col } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
 import "./App.css";
 
 function App() {
@@ -13,11 +15,11 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  // const [logIn, setLoggedIn] = useState(false);
-
-  // const userIsLoggedIn = () => {
-
-  // }
+  // if I don't have jwt I am not logged in
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem("jwt") !== null
+  );
+  console.log(loggedIn);
 
   // AXIOS CALL TO GET ALL USERS
 
@@ -39,7 +41,8 @@ function App() {
 
   return (
     <Container fluid={true} className="App">
-      <Navbar />
+      <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+      <ToastContainer />
 
       {isLoading ? (
         <LoadingIndicator />
@@ -55,6 +58,7 @@ function App() {
       <Route path="/users/:id">
         <UserProfilePage users={users} />
       </Route>
+      <Route exact path="/profile" component={MyProfilePage} />
     </Container>
   );
 }

@@ -13,13 +13,19 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
+  Button
 } from "reactstrap";
 
-const NavBar = () => {
+const NavBar = ({ loggedIn, setLoggedIn }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const logOutUser = e => {
+    e.preventDefault();
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+  };
 
   return (
     <Navbar color="light" light expand="md">
@@ -33,7 +39,7 @@ const NavBar = () => {
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink tag={Link} to="/users/1">
+            <NavLink tag={Link} to="/profile">
               My Profile
             </NavLink>
           </NavItem>
@@ -49,8 +55,13 @@ const NavBar = () => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
-
-        <AuthModal />
+        {!loggedIn ? (
+          <AuthModal loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        ) : (
+          <Button onClick={logOutUser} color="primary">
+            Log Out
+          </Button>
+        )}
       </Collapse>
     </Navbar>
   );

@@ -7,10 +7,11 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  NavItem
 } from "reactstrap";
 
-const AuthModal = () => {
+const AuthModal = ({ loggedIn, setLoggedIn }) => {
   const [modal, setModal] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
 
@@ -24,12 +25,16 @@ const AuthModal = () => {
     }
   };
 
+  const logOut = () => {
+    localStorage.removeItem("jwt");
+  };
+
   return (
     <>
       <NavLink>
-        <NavLink color="primary" onClick={toggle}>
-          Log In
-        </NavLink>
+        <NavLink onClick={toggle}>{loggedIn ? "Logged In" : "Log In"}</NavLink>
+        {loggedIn ? <NavLink onClick={logOut}>Log Out</NavLink> : ""}
+
         <Modal isOpen={modal} toggle={toggle}>
           <ModalHeader toggle={toggle}>
             {showLogin ? "Log In" : "Sign Up"}
@@ -40,12 +45,14 @@ const AuthModal = () => {
                 showLogin={showLogin}
                 toggleLogInAndSignUp={toggleLogInAndSignUp}
                 toggle={toggle}
+                setLoggedIn={setLoggedIn}
               />
             ) : (
               <SignUpForm
                 showLogin={showLogin}
                 toggleLogInAndSignUp={toggleLogInAndSignUp}
                 toggle={toggle}
+                setLoggedIn={setLoggedIn}
               />
             )}
           </ModalBody>

@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-import { Form, Button, ModalFooter } from "react-bootstrap";
+import axios from "axios";
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormFeedback,
+  FormText,
+  Button
+} from "reactstrap";
 
-const LogInForm = ({ toggle }) => {
-  const [email, setEmail] = useState("");
+const LogInForm = ({ toggle, setLoggedIn }) => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmailInput = e => {
-    setEmail(e.target.value);
-    console.log(email);
+  const handleUsernameInput = e => {
+    setUsername(e.target.value);
+    console.log(username);
   };
 
   const handlePasswordInput = e => {
@@ -17,35 +26,61 @@ const LogInForm = ({ toggle }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!email || !password) return;
-    console.log(`Signed up with email: ${email} and password: ${password}`);
-    // setLoggedIn(true);
+    if (!username || !password) return;
+    console.log(
+      `Signed up with username: ${username} and password: ${password}`
+    );
     toggle();
+    axios({
+      method: "post",
+      url: "https://insta.nextacademy.com/api/v1/login",
+      data: {
+        username: username,
+        password: password
+      }
+    }).then(result => {
+      console.log(result);
+      localStorage.setItem("jwt", result.data.auth_token);
+      setLoggedIn(true);
+      /**
+       * Example response:
+      {
+        "auth_token": "<auth token string>",
+        "message": "Successfully signed in.",
+        "status": "success",
+        "user": {
+          "id": 3,
+          "profile_picture": "<profile-pic-url>",
+          "username": "blake"
+        }
+      }
+      */
+    });
   };
 
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            onChange={handleEmailInput}
-            type="email"
-            placeholder="Enter email"
+        <FormGroup>
+          <Label for="username">Username</Label>
+          <Input
+            onChange={handleUsernameInput}
+            type="text"
+            placeholder="Enter username"
           />
-          <Form.Text className="text-muted">
+          <FormFeedback>
             We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+          </FormFeedback>
+        </FormGroup>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+        <FormGroup controlId="formBasicPassword">
+          <Label>Password</Label>
+          <Input
             onChange={handlePasswordInput}
             type="password"
             placeholder="Password"
           />
-        </Form.Group>
+        </FormGroup>
         <Button variant="primary" type="submit">
           Submit
         </Button>
