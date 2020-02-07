@@ -10,7 +10,7 @@ import {
   Button
 } from "reactstrap";
 
-const LogInForm = ({ toggle, setLoggedIn }) => {
+const LogInForm = ({ toggle, setLoggedIn, setCurrentUser, currentUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,20 +41,10 @@ const LogInForm = ({ toggle, setLoggedIn }) => {
     }).then(result => {
       console.log(result);
       localStorage.setItem("jwt", result.data.auth_token);
+      localStorage.setItem("user", JSON.stringify(result.data.user));
+      const loggedInUser = result.data.user;
       setLoggedIn(true);
-      /**
-       * Example response:
-      {
-        "auth_token": "<auth token string>",
-        "message": "Successfully signed in.",
-        "status": "success",
-        "user": {
-          "id": 3,
-          "profile_picture": "<profile-pic-url>",
-          "username": "blake"
-        }
-      }
-      */
+      setCurrentUser(loggedInUser);
     });
   };
 

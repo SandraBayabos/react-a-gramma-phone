@@ -11,7 +11,7 @@ import {
   NavItem
 } from "reactstrap";
 
-const AuthModal = ({ loggedIn, setLoggedIn }) => {
+const AuthModal = ({ loggedIn, setLoggedIn, currentUser, setCurrentUser }) => {
   const [modal, setModal] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
 
@@ -46,6 +46,8 @@ const AuthModal = ({ loggedIn, setLoggedIn }) => {
                 toggleLogInAndSignUp={toggleLogInAndSignUp}
                 toggle={toggle}
                 setLoggedIn={setLoggedIn}
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
               />
             ) : (
               <SignUpForm
@@ -53,6 +55,8 @@ const AuthModal = ({ loggedIn, setLoggedIn }) => {
                 toggleLogInAndSignUp={toggleLogInAndSignUp}
                 toggle={toggle}
                 setLoggedIn={setLoggedIn}
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
               />
             )}
           </ModalBody>

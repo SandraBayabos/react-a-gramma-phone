@@ -16,7 +16,7 @@ import {
   Button
 } from "reactstrap";
 
-const NavBar = ({ loggedIn, setLoggedIn }) => {
+const NavBar = ({ loggedIn, setLoggedIn, currentUser, setCurrentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -56,7 +56,12 @@ const NavBar = ({ loggedIn, setLoggedIn }) => {
           </UncontrolledDropdown>
         </Nav>
         {!loggedIn ? (
-          <AuthModal loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <AuthModal
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            loggedIn={loggedIn}
+            setLoggedIn={setLoggedIn}
+          />
         ) : (
           <Button onClick={logOutUser} color="primary">
             Log Out
