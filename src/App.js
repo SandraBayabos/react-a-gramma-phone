@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import LoadingIndicator from "./components/LoadingIndicator";
-import MyProfilePage from "./components/MyProfilePage";
+import MyProfilePage from "./pages/MyProfilePage";
 import { Container } from "reactstrap";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
