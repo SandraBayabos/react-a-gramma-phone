@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import UploadPage from "./UploadPage";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Container, Row, Col } from "reactstrap";
 import styled from "styled-components";
@@ -9,6 +10,8 @@ const MyProfilePage = ({ currentUser }) => {
   const jwt = localStorage.getItem("jwt");
 
   const [currentUserImages, setCurrentUserImages] = useState([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     axios({
@@ -31,7 +34,8 @@ const MyProfilePage = ({ currentUser }) => {
   }, []);
 
   if (!jwt || !currentUser) {
-    return <Redirect to="/" />;
+    toast("You aren't authorized to view this page! Please log in first");
+    history.push("/");
   }
   return (
     <Container fluid={true}>
@@ -43,6 +47,10 @@ const MyProfilePage = ({ currentUser }) => {
           <img src={currentUser.profile_picture} />
         </Col>
       </Row>
+      <Row>
+        <Link to="/upload">Upload a Picture?</Link>
+      </Row>
+
       <Row>
         {currentUserImages.map((image, index) => {
           return (

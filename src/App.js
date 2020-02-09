@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import LoadingIndicator from "./components/LoadingIndicator";
 import MyProfilePage from "./pages/MyProfilePage";
+import UploadPage from "./pages/UploadPage";
 import { Container } from "reactstrap";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
@@ -71,6 +72,9 @@ function App() {
         path="/profile"
         component={props => <MyProfilePage currentUser={currentUser} />}
       />
+      <Route path="/upload">
+        <UploadPage />
+      </Route>
     </Container>
   );
 }
