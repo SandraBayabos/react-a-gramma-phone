@@ -3,6 +3,32 @@ import { Form, FormGroup, FormText, Input, Button, Row, Col } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import styled from "styled-components";
+
+const StyledCard = styled.div`
+  height: 60vh;
+  width: 60vw;
+  position: relative;
+  border: 1px solid white;
+  border-radius: 20px;
+  margin-top: 5%;
+  background: #2b4141;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledHeader = styled.h3`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+`;
+
+const StyledImg = styled.img`
+  height: 80%;
+`;
 
 const UploadPage = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -47,15 +73,15 @@ const UploadPage = () => {
   return (
     <>
       <Row className="d-flex justify-content-center mb-4">
-        <div className="card">
+        <StyledCard className="card">
           {previewImage ? (
-            <img src={previewImage} width="50%" height="50%" />
+            <StyledImg src={previewImage} />
           ) : (
-            <h3 className="text-center">
+            <StyledHeader className="text-center">
               {message ? message : "Live Preview"}
-            </h3>
+            </StyledHeader>
           )}
-        </div>
+        </StyledCard>
       </Row>
 
       <Row className="text-center d-flex justify-content-center">

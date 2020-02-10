@@ -44,7 +44,7 @@ function App() {
   }, []);
 
   return (
-    <Container fluid={true} className="App">
+    <Container fluid={true} className="App px-0">
       <Navbar
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
