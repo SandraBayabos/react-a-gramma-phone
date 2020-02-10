@@ -4,6 +4,8 @@ body {
 
 .App {
   background: #2b4141;
+  height: auto;
+  min-height: 100vh;
 }
 
 .container {
