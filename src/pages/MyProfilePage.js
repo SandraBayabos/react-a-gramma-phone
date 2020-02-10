@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import UploadPage from "./UploadPage";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 import { toast } from "react-toastify";
